@@ -19,6 +19,11 @@ Kullanıcılar, giriş ekranından form tipini seçerek (Teslim veya İade) ilgi
 ## 📂 Proje Yapısı
 ```
 EKIPMAN-FORM/
+├── screenshots/
+│   ├── anasayfa.jpg
+│   ├── iadeformu.jpg
+│   ├── pdfsayfasi.jpg
+│   └── teslimformu.jpg
 ├── static/
 │   ├── magna-icon.png
 │   ├── magna-logo.png
@@ -53,9 +58,17 @@ python app.py
 👉 Tarayıcıda aç: **http://127.0.0.1:5000**
 
 ## 📸 Ekran Görüntüleri
-- **Ana Sayfa:** Teslim / İade seçimi  
-- **Form Sayfası:** Ekipman listesi + diğer alan  
-- **PDF Çıktısı:** Kurumsal tasarım, imza bölümü, logo  
+- **Ana Sayfa**  
+  ![Ana Sayfa](screenshots/anasayfa.jpg)
+
+- **Teslim Formu**  
+  ![Teslim Formu](screenshots/teslimformu.jpg)
+
+- **İade Formu**  
+  ![İade Formu](screenshots/iadeformu.jpg)
+
+- **PDF Çıktısı**  
+  ![PDF Sayfası](screenshots/pdfsayfasi.jpg)
 
 ## 👨‍💻 Geliştiren
 **Mehmet TAT**  
