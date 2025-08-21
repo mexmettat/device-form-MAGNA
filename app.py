@@ -7,11 +7,10 @@ URUNLER = [
     "Bilgisayar",
     "Cep Telefonu",
     "Şirket Hattı(SIM)",
-    "Klavye - Mouse",
-    "Şarj Adaptör - Çanta",
+    "Giriş Aygıtları (Klavye - Mouse)",
+    "Şarj Adaptörü - Taşıma Çantası",
     "Monitör",
     "Docking Station",
-    "Diğer",
 ]
 
 def mode_title(mode: str) -> str:
@@ -71,6 +70,22 @@ def preview():
             "kayit": (f.get(f"kayit_{i}") or "").strip(),
         })
 
+    urun_c  = f.getlist("urun_custom[]")
+    marka_c = f.getlist("marka_custom[]")
+    model_c = f.getlist("model_custom[]")
+    kayit_c = f.getlist("kayit_custom[]")
+
+    for u, m, mo, k in zip(urun_c, marka_c, model_c, kayit_c):
+        # tamamen boş satırları at
+        if not (u or m or mo or k):
+            continue
+        rows.append({
+            "urun": (u or "").strip(),
+            "marka": (m or "").strip(),
+            "model": (mo or "").strip(),
+            "kayit": (k or "").strip(),
+        })
+
     ctx = {
         "mode": mode,
         "mode_title": mode_title(mode),
@@ -100,4 +115,4 @@ def preview():
     return render_template("pdf.html", **ctx)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5002)

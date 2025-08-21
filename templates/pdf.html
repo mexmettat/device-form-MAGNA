@@ -69,12 +69,13 @@
     </section>
 
     {% if mode == "teslim" %}
-    <div class="orientation">
-      <label>
-        <input type="checkbox" disabled {% if oryantasyon %}checked{% endif %}>Oryantasyon aldım
-      </label>
-    </div>
+    <section class="handwrite bordered" style="margin-top:8px;">
+      <div class="handwrite-note">
+        Oryantasyon eğitimi aldım <em>(El yazısı ile yazınız)</em>
+      </div>
+    </section>
     {% endif %}
+
 
     <section class="sign bordered">
       <div class="sign-col">

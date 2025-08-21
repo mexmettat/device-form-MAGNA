@@ -54,6 +54,7 @@
               <th class="w-marka">Marka</th>
               <th class="w-model">Model</th>
               <th class="w-kayit">Kayıt/Seri No</th>
+              <th style="width:70px" class="no-print"></th>
             </tr>
           </thead>
           <tbody>
@@ -63,10 +64,15 @@
               <td><input name="marka_{{ loop.index0 }}"></td>
               <td><input name="model_{{ loop.index0 }}"></td>
               <td><input name="kayit_{{ loop.index0 }}"></td>
+              <td class="no-print"></td>
             </tr>
           {% endfor %}
           </tbody>
+          <tbody id="customRows"></tbody>
         </table>
+         <div style="margin-top:8px; text-align:right" class="no-print">
+            <button type="button" id="addRowBtn" class="secondary">+</button>
+         </div>
       </section>
 
       <section class="diger bordered">
@@ -85,13 +91,13 @@
       </section>
 
       {% if mode == "teslim" %}
-      <div class="orientation">
-        <label>
-          <input type="checkbox" name="oryantasyon" value="evet">
-          Oryantasyon aldım
-        </label>
-      </div>
+      <section class="handwrite bordered" style="margin-top:8px;">
+        <div class="handwrite-note">
+          Oryantasyon eğitimi aldım <em>(El yazısı ile yazınız)</em>
+        </div>
+      </section>
       {% endif %}
+
 
       <section class="sign bordered">
         <div class="sign-col">
@@ -131,6 +137,39 @@
       el.addEventListener('focus', openPicker);
       el.addEventListener('mousedown', openPicker);
     });
+
+    // --- Dinamik satır ekleme/silme ---
+  const customRows = document.getElementById('customRows');
+  const addBtn = document.getElementById('addRowBtn');
+
+  addBtn?.addEventListener('click', () => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input name="urun_custom[]" placeholder="Ürün"></td>
+      <td><input name="marka_custom[]"></td>
+      <td><input name="model_custom[]"></td>
+      <td><input name="kayit_custom[]"></td>
+      <td class="no-print"><button type="button" class="row-del">Sil</button></td>
+    `;
+    customRows.appendChild(tr);
+  });
+
+  customRows.addEventListener('click', (e) => {
+    if (e.target.classList.contains('row-del')) {
+      e.target.closest('tr')?.remove();
+    }
+  });
+
+  // --- Tarih sadece picker ---
+  document.querySelectorAll('.date-only').forEach(el => {
+    el.addEventListener('keydown', e => e.preventDefault());
+    el.addEventListener('paste',  e => e.preventDefault());
+    el.addEventListener('drop',   e => e.preventDefault());
+    const openPicker = () => { if (el.showPicker) el.showPicker(); };
+    el.addEventListener('focus', openPicker);
+    el.addEventListener('mousedown', openPicker);
+  });
+  
   </script>
 </body>
 </html>
