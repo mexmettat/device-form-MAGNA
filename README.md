@@ -1,22 +1,22 @@
-# 🏭 Kurumsal Ekipman Teslim & İade Formu
+# 🏭 Corporate Equipment Delivery & Return Form
 
-Bu proje, fabrika ve ofis ortamlarında çalışanların **ekipman teslimi** ve **iadesi** süreçlerini dijitalleştirmek için geliştirilmiş bir **Flask tabanlı web uygulamasıdır**.  
-Kullanıcılar, giriş ekranından form tipini seçerek (Teslim veya İade) ilgili formu doldurabilir ve **PDF çıktısı** alabilirler.
+This project is a **Flask-based web application** developed to digitalize the processes of **equipment delivery** and **returns** in factory and office environments.  
+Users can select the form type (Delivery or Return) from the home page, fill out the relevant form, and generate a **PDF output**.
 
-## 🚀 Özellikler
-- 📌 **Form Seçimi:** Açılış ekranında Teslim veya İade seçme  
-- 🖥️ **Ekipman Listesi:** Bilgisayar, telefon, sim kart, monitör vb. cihazlar  
-- ✏️ **Diğer Alanı:** Uzun metinlerde satır kaydırma destekli  
-- ✅ **Oryantasyon Onayı:** “Oryantasyon aldım” kutucuğu  
-- 📄 **PDF Çıktısı:** Kurumsal formatta, imza alanları ve logo ile yazdırılabilir  
-- 🏭 **Kurumsal Tasarım:** Logo alanı, ortalanmış giriş ekranı, fabrika kullanımı için optimize edilmiş sade arayüz  
+## 🚀 Features
+- 📌 **Form Selection:** Choose Delivery or Return on the home screen  
+- 🖥️ **Equipment List:** Computer, phone, SIM card, monitor, etc.  
+- ✏️ **Other Field:** Supports line wrapping for long text inputs  
+- ✅ **Orientation Confirmation:** “I received orientation” checkbox  
+- 📄 **PDF Output:** Printable in corporate format with signature fields and logo  
+- 🏭 **Corporate Design:** Logo area, centered login screen, and simple UI optimized for factory usage  
 
-## 🛠 Kullanılan Teknolojiler
+## 🛠 Technologies Used
 - **Backend:** Python (Flask)  
 - **Frontend:** HTML5, CSS3, Jinja2  
-- **PDF:** Tarayıcı yazdırma (Print to PDF)  
+- **PDF:** Browser print (Print to PDF)  
 
-## 📂 Proje Yapısı
+## 📂 Project Structure
 ```
 EKIPMAN-FORM/
 ├── screenshots/
@@ -37,40 +37,40 @@ EKIPMAN-FORM/
 └── venv/
 ```
 
-## ⚙️ Kurulum & Çalıştırma
+## ⚙️ Installation & Run
 ```bash
-# 1. Repo klonla
+# 1. Clone the repository
 git clone https://github.com/mexmettat/ekipman-form.git
 cd ekipman-form
 
-# 2. Sanal ortam oluştur ve aktif et
+# 2. Create and activate a virtual environment
 python -m venv venv
 source venv/bin/activate   # Mac/Linux
 venv\Scripts\activate      # Windows
 
-# 3. Bağımlılıkları yükle
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Uygulamayı başlat
+# 4. Run the application
 python app.py
 ```
 
-👉 Tarayıcıda aç: **http://127.0.0.1:5000**
+👉 Open in browser: **http://127.0.0.1:5000**
 
-## 📸 Ekran Görüntüleri
-- **Ana Sayfa**  
-  ![Ana Sayfa](screenshots/anasayfa.jpg)
+## 📸 Screenshots
+- **Home Page**  
+  ![Home Page](screenshots/anasayfa.jpg)
 
-- **Teslim Formu**  
-  ![Teslim Formu](screenshots/teslimformu.jpg)
+- **Delivery Form**  
+  ![Delivery Form](screenshots/teslimformu.jpg)
 
-- **İade Formu**  
-  ![İade Formu](screenshots/iadeformu.jpg)
+- **Return Form**  
+  ![Return Form](screenshots/iadeformu.jpg)
 
-- **PDF Çıktısı**  
-  ![PDF Sayfası](screenshots/pdfsayfasi.jpg)
+- **PDF Output**  
+  ![PDF Page](screenshots/pdfsayfasi.jpg)
 
-## 👨‍💻 Geliştiren
+## 👨‍💻 Developed By
 **Mehmet TAT**  
 - [GitHub](https://github.com/mexmettat)  
 - [LinkedIn](https://www.linkedin.com/in/mehmettat/)  
