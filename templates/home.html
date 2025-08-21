@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>BT Form Uygulaması</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='magna-icon.png') }}">
+  <style>
+    :root{ --ink:#0b1a2b; --muted:#667085; --line:#e5e7eb; --bg:#f5f7fb; }
+    html,body{ height:100%; margin:0; }
+    body{
+      background:var(--bg);
+      display:grid; place-items:center;
+      font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:#0f172a;
+      padding:24px;
+    }
+    .shell{
+      width:min(900px, 96vw);
+      background:#fff; border:1px solid var(--line); border-radius:16px;
+      box-shadow:0 10px 30px rgba(16,24,40,.08);
+      padding:28px 28px 22px;
+    }
+    .brand{
+      display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:8px;
+    }
+    .brand img{ height:42px; width:auto; }
+    .brand .org{ font-weight:800; letter-spacing:.3px; color:var(--ink); }
+
+    .hero{ text-align:center; margin:16px auto 22px; }
+    .hero h1{ margin:6px 0 6px; font-size:26px; color:var(--ink); }
+    .hero p{ margin:0; color:var(--muted); }
+
+    .grid{
+      display:grid; grid-template-columns: repeat(2, minmax(240px,1fr)); gap:14px;
+      margin-top:18px;
+    }
+    .card{
+      border:1px solid var(--line); border-radius:14px; background:#fff;
+      padding:18px; display:flex; gap:14px; align-items:center;
+      text-decoration:none; color:inherit; transition:.15s box-shadow, .05s transform;
+    }
+    .card:hover{ box-shadow:0 8px 24px rgba(16,24,40,.08); transform:translateY(-1px); }
+    .ico{
+      flex:0 0 52px; height:52px; border-radius:12px; background:#0b1a2b12;
+      display:flex; align-items:center; justify-content:center; font-size:24px;
+    }
+    .card h3{ margin:0 0 4px; font-size:18px; color:var(--ink); }
+    .card p{ margin:0; color:var(--muted); font-size:13px; }
+
+    .footer{
+      margin-top:18px; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:12px;
+    }
+    .kbd{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; background:#f3f4f6; border:1px solid #e5e7eb; padding:2px 6px; border-radius:6px; }
+
+    @media (max-width:720px){ .grid{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <!-- Logo + kurum adı -->
+    <div class="brand">
+      <img src="{{ url_for('static', filename='magna-logo.png') }}" alt="MAGNA">
+      <div class="org">MAGNA · BT Form Uygulaması</div>
+    </div>
+
+    <!-- Başlık -->
+    <div class="hero">
+      <h1>Form Türü</h1>
+      <p>Lütfen oluşturmak istediğiniz formu seçin.</p>
+    </div>
+
+    <!-- Seçim kartları -->
+    <div class="grid">
+      <a class="card" href="{{ url_for('form', mode='teslim') }}">
+        <div class="ico">📦</div>
+        <div>
+          <h3>Teslim Formu</h3>
+          <p>Ekipmanın personele ilk teslimini kaydedin.</p>
+        </div>
+      </a>
+
+      <a class="card" href="{{ url_for('form', mode='iade') }}">
+        <div class="ico">🔁</div>
+        <div>
+          <h3>İade Formu</h3>
+          <p>Personele ait ekipmanın iadesini kaydedin.</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Alt bilgi -->
+    <div class="footer">
+      <div>Kısayol: <span class="kbd">T</span> Teslim · <span class="kbd">İ</span> İade</div>
+    </div>
+  </div>
+
+  <script>
+    // Klavye kısayolları
+    addEventListener('keydown', e => {
+      const k = (e.key||'').toLowerCase();
+      if (k === 't') location.href = "{{ url_for('form', mode='teslim') }}";
+      if (k === 'i' || k === 'ı') location.href = "{{ url_for('form', mode='iade') }}";
+    });
+  </script>
+</body>
+</html>

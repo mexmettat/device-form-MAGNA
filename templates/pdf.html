@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <title>{{ mode_title }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='magna-icon.png') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="logo-box">
+        <img src="{{ url_for('static', filename='magna-logo.png') }}" alt="MAGNA Logo">
+      </div>
+      <div class="title">
+        <div>BİLGİ TEKNOLOJİLERİ</div>
+        <div class="bold">{{ mode_title }}</div>
+      </div>
+      <div class="date-box">
+        <div class="label">TARİH</div>
+        <div class="readonly">{{ tarih }}</div>
+      </div>
+    </header>
+
+    <section class="top-fields bordered">
+      <div class="row static">
+        <div><span class="lab">Teslim Alan Kullanıcı Adı Soyadı</span><span class="val">{{ teslim_alan }}</span></div>
+        <div><span class="lab">Bölüm</span><span class="val">{{ bolum }}</span></div>
+        <div><span class="lab">Ünvan</span><span class="val">{{ unvan }}</span></div>
+      </div>
+    </section>
+
+    <section class="table-area bordered">
+      <table class="form-table">
+        <thead>
+          <tr>
+            <th class="w-urun">Ürün</th>
+            <th class="w-marka">Marka</th>
+            <th class="w-model">Model</th>
+            <th class="w-kayit">Kayıt/Seri No</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for r in rows %}
+          <tr>
+            <td class="ro">{{ r.urun }}</td>
+            <td class="ro">{{ r.marka }}</td>
+            <td class="ro">{{ r.model }}</td>
+            <td class="ro">{{ r.kayit }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="diger bordered">
+      <div class="diger-title">
+        Diğer <span class="muted">(İşe özgü ise lütfen yazınız.)</span>
+      </div>
+      <div class="readonly multi">{{ diger|replace('\n','<br/>')|safe }}</div>
+    </section>
+
+    <section class="handwrite bordered">
+        <div class="handwrite-note">
+            Listedeki ekipmanları eksiksiz olarak
+            {{ 'teslim aldım' if mode == 'teslim' else 'iade ettim' }}
+            <em>(El yazısı ile yazınız)</em>
+        </div>
+    </section>
+
+    {% if mode == "teslim" %}
+    <div class="orientation">
+      <label>
+        <input type="checkbox" disabled {% if oryantasyon %}checked{% endif %}>Oryantasyon aldım
+      </label>
+    </div>
+    {% endif %}
+
+    <section class="sign bordered">
+      <div class="sign-col">
+        <div class="sign-title">Teslim Eden</div>
+        <div class="sign-row"><span>Adı Soyadı:</span><div class="line">{{ teslim_eden_ad }}</div></div>
+        <div class="sign-row"><span>Tarih:</span><div class="line">{{ teslim_eden_tarih }}</div></div>
+        <div class="sign-row"><span>İmza:</span><div class="sign-box"></div></div>
+      </div>
+      <div class="sign-col">
+        <div class="sign-title">Teslim Alan</div>
+        <div class="sign-row"><span>Adı Soyadı:</span><div class="line">{{ teslim_alan_ad }}</div></div>
+        <div class="sign-row"><span>Tarih:</span><div class="line">{{ teslim_alan_tarih }}</div></div>
+        <div class="sign-row"><span>İmza:</span><div class="sign-box"></div></div>
+      </div>
+    </section>
+  </div>
+
+  {% if auto_print %}
+  <script>
+    window.addEventListener('load', () => {
+      window.print();
+      window.onafterprint = () => window.close();
+    });
+  </script>
+  {% endif %}
+</body>
+</html>

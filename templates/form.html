@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{{ mode_title }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='magna-icon.png') }}">
+</head>
+<body>
+  <div class="page">
+
+    <header class="header">
+      <div class="logo-box">
+        <img src="{{ url_for('static', filename='magna-logo.png') }}" alt="MAGNA Logo">
+      </div>
+      <div class="title">
+        <div>BİLGİ TEKNOLOJİLERİ</div>
+        <div class="bold">{{ mode_title }}</div>
+      </div>
+      <div class="date-box">
+        <label for="tarih">TARİH</label>
+        <input id="tarih" name="tarih" form="f"
+               type="date" class="date-only"
+               inputmode="none" autocomplete="off">
+      </div>
+    </header>
+
+    <form id="f" method="post" action="/preview" target="_blank">
+      <input type="hidden" name="mode" value="{{ mode }}"/>
+
+      <section class="top-fields bordered">
+        <div class="row">
+          <label>
+            {{ labels.top_name_label }}
+            <input name="teslim_alan" required>
+          </label>
+          <label>
+            Bölüm
+            <input name="bolum">
+          </label>
+          <label>
+            Ünvan
+            <input name="unvan">
+          </label>
+        </div>
+      </section>
+
+      <section class="table-area bordered">
+        <table class="form-table">
+          <thead>
+            <tr>
+              <th class="w-urun">Ürün</th>
+              <th class="w-marka">Marka</th>
+              <th class="w-model">Model</th>
+              <th class="w-kayit">Kayıt/Seri No</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for u in urunler %}
+            <tr>
+              <td><input value="{{u}}" readonly></td>
+              <td><input name="marka_{{ loop.index0 }}"></td>
+              <td><input name="model_{{ loop.index0 }}"></td>
+              <td><input name="kayit_{{ loop.index0 }}"></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </section>
+
+      <section class="diger bordered">
+        <div class="diger-title">
+          Diğer <span class="muted">(İşe özgü ise lütfen yazınız.)</span>
+        </div>
+        <textarea name="diger" rows="8"></textarea>
+      </section>
+
+      <section class="handwrite bordered">
+        <div class="handwrite-note">
+          Listedeki ekipmanları eksiksiz olarak
+          {{ 'teslim aldım' if mode == 'teslim' else 'iade ettim' }}
+          <em>(El yazısı ile yazınız)</em>
+        </div>
+      </section>
+
+      {% if mode == "teslim" %}
+      <div class="orientation">
+        <label>
+          <input type="checkbox" name="oryantasyon" value="evet">
+          Oryantasyon aldım
+        </label>
+      </div>
+      {% endif %}
+
+      <section class="sign bordered">
+        <div class="sign-col">
+          <div class="sign-title">{{ labels.left_block_title }}</div>
+          <div class="sign-row"><span>Adı Soyadı:</span><input name="teslim_eden_ad"></div>
+          <div class="sign-row">
+            <span>Tarih:</span>
+            <input type="date" name="teslim_eden_tarih" class="date-only" inputmode="none" autocomplete="off">
+          </div>
+          <div class="sign-row"><span>İmza:</span><div class="sign-box"></div></div>
+        </div>
+
+        <div class="sign-col">
+          <div class="sign-title">{{ labels.right_block_title }}</div>
+          <div class="sign-row"><span>Adı Soyadı:</span><input name="teslim_alan_ad"></div>
+          <div class="sign-row">
+            <span>Tarih:</span>
+            <input type="date" name="teslim_alan_tarih" class="date-only" inputmode="none" autocomplete="off">
+          </div>
+          <div class="sign-row"><span>İmza:</span><div class="sign-box"></div></div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="submit">BASKI GÖRÜNÜMÜ / PDF</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Yalnızca takvimden seçim yapılabilsin (klavye/paste kapalı) -->
+  <script>
+    document.querySelectorAll('.date-only').forEach(el => {
+      el.addEventListener('keydown', e => e.preventDefault());
+      el.addEventListener('paste',  e => e.preventDefault());
+      el.addEventListener('drop',   e => e.preventDefault());
+      const openPicker = () => { if (el.showPicker) el.showPicker(); };
+      el.addEventListener('focus', openPicker);
+      el.addEventListener('mousedown', openPicker);
+    });
+  </script>
+</body>
+</html>
