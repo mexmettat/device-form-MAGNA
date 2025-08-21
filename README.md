@@ -7,7 +7,7 @@ Users can select the form type (Delivery or Return) from the home page, fill out
 - 📌 **Form Selection:** Choose Delivery or Return on the home screen  
 - 🖥️ **Equipment List:** Computer, phone, SIM card, monitor, etc.  
 - ✏️ **Other Field:** Supports line wrapping for long text inputs  
-- ✅ **Orientation Confirmation:** “I received orientation” checkbox  
+- ➕ **Add Row Button:** Dynamically add new rows to the equipment table 
 - 📄 **PDF Output:** Printable in corporate format with signature fields and logo  
 - 🏭 **Corporate Design:** Logo area, centered login screen, and simple UI optimized for factory usage  
 
